@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/16 17:35:57 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/18 20:56:09 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,24 @@ int	n_pipes(t_struct *c)
 	}
 	return (1);
 }
-/*
+
 int	pipex(t_struct *c)
 {
-	
+	int	pid;
+	int n;
+
+	n = 0;
+	(void)c;
+	pid = fork();
+	if (pid == 0)
+	{
+		n = 1;
+		printf("Salut %d\n", n);
+	}
+	else
+	{
+		n = 31;
+		printf("priviet %d\n", n);
+	}
+	return (0);
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/18 20:13:27 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/18 20:52:18 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ int	main(int argc, char **argv, char **env)
 	i = 1;
 	c = init_struct();
 	set_struct(c, argc, argv, env);
-	//printf("%s\n", c->path);
 	while (++i < argc - 1)
 	{
-		//printf("yo ne marche pas avec "ls -l utiliser un split "\n");
 		if (!get_f_path(c, argv[i]))
 		{
 			free_end(c);
@@ -37,19 +35,15 @@ int	main(int argc, char **argv, char **env)
 		}
 	}
 	split_cmd(c);
-	//printf("je suis cmd %s\n", c->l_pathes->head->cmd[0]);
 	add_index(c->l_pathes);
-//	display_list(c->l_pathes);
-	//execve(c->final_path, &argv[1], env);
 	good_path(c, argv);
-	//printf("salut pipe %s\n", c->l_pathes->head->cmd[1]); //pas fan
 	if (!c->final_path)
 	{
 		free_d_tab(c->to_try);
 		free(c);
 		return (0);
 	}
-	//return (pipex(c));
+	return (pipex(c));
 }
 
 	// int fd = access("decouvertes", F_OK);

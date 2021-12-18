@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/15 23:36:18 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/18 20:24:32 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,4 @@ t_list	*list_end(t_list *list, char *content)
 	return (list);
 }
 
-	// execve(/bin/ls, {"ls", "-l"}, env);
+//	execve(/bin/ls, {"ls", "-l"}, env);

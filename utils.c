@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 19:03:53 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/18 20:12:33 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/18 20:27:46 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ char	*good_path(t_struct *c, char **str)
 	{
 		if (ft_strncmp(i->cmd[0], *str, ft_strlen(*str)))
 		{
-			printf("hola %s\n", *str);
-			execve(i->content, &i->cmd[0], c->env);
+			//printf("hola %s\n", *str);
+			//execve(i->content, &i->cmd[0], c->env);
 			return (i->content);
 		}
 		i = i->next;

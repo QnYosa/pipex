@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/18 20:01:19 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/18 20:52:56 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,6 @@ t_list		*list_end(t_list *list, char *content);
 void		display_list(t_list *l);
 
 /*		EXEC		*/
+int			pipex(t_struct *c);
+
 #endif
