@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/16 17:16:40 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/18 20:01:19 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_struct
 	char	**to_try;
 	t_list	*f_pathes;
 	char	*final_path;
-	t_list	*l_pathes;
+	t_list	*l_pathes; // liste des cmd
 }	t_struct;
 
 /*		PARSING		*/

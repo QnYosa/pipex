@@ -1,1 +1,4 @@
 execve(c->final_path, &argv[1], env);
+
+
+Parsing okay ? 

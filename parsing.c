@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/15 19:32:14 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/18 20:11:31 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	add_slash(char **to_try)
 
 void	add_cmd(char **to_try, char *cmd)
 {
-	int	i;
+	int		i;
+	char	**av;
 
+	av = ft_split(cmd, ' ');
 	i = -1;
 	while (to_try[++i])
-		to_try[i] = ft_strjoin(to_try[i], cmd);
+		to_try[i] = ft_strjoin(to_try[i], av[0]);
 }
 
 int	get_f_path(t_struct *c, char *tab)
