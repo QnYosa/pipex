@@ -1,0 +1,11 @@
+return values:
+
+Negative Value: creation of a child process was unsuccessful.
+
+Zero: Returned to the newly created child process.
+
+Positive value: Returned to parent or caller. 
+The value contains process ID of newly created child process.
+
+chopper le bin avec 
+spliter le env;

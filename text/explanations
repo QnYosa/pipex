@@ -1,0 +1,2 @@
+av[2] et av[3] == commandes
+Nous utilisons la fonction "pipe(fd)" qui va réserver deux descripteurs de fichiers dans le tableau fd, "fd[0]" pour l'extrémité à lire et "fd[1]" pour l'extrémité à écrire
