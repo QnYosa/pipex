@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/18 20:52:18 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/19 20:44:40 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!get_f_path(c, argv[i]))
 		{
+			printf("JE vous emmerde et je rentre a ma maison\n");
 			free_end(c);
 			return (0);
 		}
@@ -37,6 +38,8 @@ int	main(int argc, char **argv, char **env)
 	split_cmd(c);
 	add_index(c->l_pathes);
 	good_path(c, argv);
+// j'ai recupere mes commandes et mes options tester si les optioms marchent.
+	display_list(c->l_pathes);
 	if (!c->final_path)
 	{
 		free_d_tab(c->to_try);

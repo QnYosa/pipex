@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/18 20:52:56 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/19 20:51:30 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_struct
 	// int	n_fork;
 	int		**pipe; //toujours un de plus que de process
 	char	**to_try;
-	t_list	*f_pathes;
+	t_list	*f_pathes; // useless
 	char	*final_path;
 	t_list	*l_pathes; // liste des cmd
 }	t_struct;
@@ -66,6 +66,7 @@ char		*good_path(t_struct *c, char **str);
 /*		FREE		*/
 void		free_d_tab(char **tab);
 void		free_end(t_struct *c);
+void		free_t_lists(t_list *c);
 
 /*		INIT		*/
 void		add_index(t_list *l);
@@ -73,6 +74,7 @@ void		set_struct(t_struct *c, int argc, char **argv, char **envi);
 t_struct	*init_struct(void);
 t_list		*init_list(void);
 t_list		*list_end(t_list *list, char *content);
+int			malloc_pipe(t_struct *c);
 
 /*		DISPLAY		*/
 void		display_list(t_list *l);

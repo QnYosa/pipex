@@ -3,3 +3,5 @@ puis fork
 
 dup entre les deux ? 
 int dup2(int old_file_descriptor, int new_file_descriptor);
+
+comment tester les options garbage. 

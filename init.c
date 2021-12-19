@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/18 20:24:32 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/19 20:54:39 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	set_struct(t_struct *c, int argc, char **argv, char **envi)
 	c->ac = argc;
 	c->av = argv;
 	c->env = envi;
+	c->n_p = 0;
 	c->final_path = NULL;
 	c->path = find_path(envi);
 	c->l_pathes = init_list();
@@ -57,6 +58,7 @@ t_list	*init_list(void)
 		return (NULL);
 	list->head = NULL;
 	list->tail = NULL;
+	list->length = 0;
 	return (list);
 }
 
@@ -83,6 +85,25 @@ t_list	*list_end(t_list *list, char *content)
 	}
 	list->length++;
 	return (list);
+}
+
+int	malloc_pipe(t_struct *c)
+{
+	int	i;
+
+	i = -1;
+	c->pipe = malloc(sizeof(int) *  c->l_pathes->length);
+	if (!c->pipe)
+		return (0);
+	if (!c)
+		return (0);
+	while (++i < c->l_pathes->length)
+	{
+		c->pipe[i] = malloc(sizeof(int) * 2);
+		if (!c->pipe[i])
+			return (0);
+	}
+	return (1);
 }
 
 //	execve(/bin/ls, {"ls", "-l"}, env);
