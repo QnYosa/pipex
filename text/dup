@@ -1,0 +1,28 @@
+may use open function to create the outfile.
+
+utiliser le dernier argv pour le nom. 
+int file = open("nameofhtefile", O_WRONLY, | O_CREAT, 0777)
+if (file == -1)
+	return (0); 
+	=> file will seem to be the pid.
+
+use open to check if infile is correct else return.
+use open to then know if outfile exists and if wether we have to create it or not.
+
+fd		  file
+0		= stdin
+1		= stdout
+2		= stderr
+3		= example.txt
+
+if I do:	file2 = dup2(file, 1); I can also use a constant like file2 = dup2(file, STDOUT_FILENO)
+	=> I would then have:
+
+fd		  file
+0		= stdin
+1		= example.txt
+2		= stderr
+3		= example.txt
+
+it doesnt change the process id nor change the fd already opened.
+I can now close the useless file descriptor there 3 like this: close(3). 

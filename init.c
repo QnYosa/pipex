@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/19 20:54:39 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/20 21:22:28 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	malloc_pipe(t_struct *c)
 	int	i;
 
 	i = -1;
-	c->pipe = malloc(sizeof(int) *  c->l_pathes->length);
+	c->pipe = malloc(sizeof(int) * c->l_pathes->length);
 	if (!c->pipe)
 		return (0);
 	if (!c)

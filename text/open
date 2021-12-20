@@ -1,0 +1,13 @@
+FLAGS:
+
+O_RDONLY
+O_WRONLY
+O_RDWR
+
+O_CREAT if file doesnt exists create it.
+O_TRUNC if file exists write starting at first bite.
+O_APPEND if file exists writw starting at last bite.
+
+you can add flags thanks to binary operators
+
+open return -1 if it fails. 

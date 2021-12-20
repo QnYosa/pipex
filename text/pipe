@@ -1,2 +1,6 @@
 on va ouvrir tous les pipes dans le parent
 
+on pipe puis on fork dans cet ordre et pas dans un autre
+
+fd[0] = read side.
+fd[1] = write side.

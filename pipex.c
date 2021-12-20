@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/19 20:55:04 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/20 22:57:35 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	pipex(t_struct *c)
 	printf("nombre de pipes : %d\n", c->l_pathes->length);
 	if (!malloc_pipe(c))
 		return (0);
-	if (pipe(pfd) == -1)
+	if (pipe(c->pipe[0]) == -1)
 	{
 		printf("pipe failed\n");
 		return (1);
@@ -46,14 +46,17 @@ int	pipex(t_struct *c)
 	pid = fork();
 	if (pid == 0)
 	{
+		int x;
+
+		x = 24;
 		//dup2();
-		close(pfd[1]);
+		close(c->pipe[0][1]);
 		printf("Salut\n");
 	}
 	else
 	{
 		//dup2();
-		close(pfd[0]);
+		close(c->pipe[0][0]);
 		printf("priviet\n");
 	}
 	return (0);

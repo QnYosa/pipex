@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/19 20:44:40 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/20 23:29:25 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 
 // // env permet de recuperer path poour executer la commande
 // //int			path_okay();
+int	check_files(t_struct *c)
+{
+	int	fd;
+
+	(void)c;
+	fd = open(c->av[0], O_RDONLY);
+	if (fd == -1)
+	{
+		free_end(c);
+		return (fd);
+	}
+	printf("number = %d\n ", fd);
+	fd = open(c->av[c->ac - 1], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+	printf("number = %d\n ", fd);
+	return (1);
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -26,6 +42,8 @@ int	main(int argc, char **argv, char **env)
 	i = 1;
 	c = init_struct();
 	set_struct(c, argc, argv, env);
+	if (check_files(c) == -1)
+		return (-1);
 	while (++i < argc - 1)
 	{
 		if (!get_f_path(c, argv[i]))
