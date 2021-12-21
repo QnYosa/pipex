@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/20 21:22:28 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:27:22 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_struct	*init_struct(void)
 	c->n_p = -1;
 	c->av = NULL;
 	c->env = NULL;
-	//c->n_fork = 0;
-	//c->pipe = NULL;
 	c->path = NULL;
 	c->to_try = NULL;
 	c->l_pathes = NULL;
@@ -45,7 +43,7 @@ void	set_struct(t_struct *c, int argc, char **argv, char **envi)
 	c->n_p = 0;
 	c->final_path = NULL;
 	c->path = find_path(envi);
-	c->l_pathes = init_list();
+	c->l_pathes = init_list(); // a securiser
 }
 
 t_list	*init_list(void)
@@ -92,16 +90,18 @@ int	malloc_pipe(t_struct *c)
 	int	i;
 
 	i = -1;
-	c->pipe = malloc(sizeof(int) * c->l_pathes->length);
+	c->pipe = malloc(sizeof(int) * (c->l_pathes->length - 1));
 	if (!c->pipe)
 		return (0);
-	if (!c)
-		return (0);
-	while (++i < c->l_pathes->length)
+	while (++i < (c->l_pathes->length - 1))
 	{
 		c->pipe[i] = malloc(sizeof(int) * 2);
 		if (!c->pipe[i])
+		{
+			free_d_tab(c->pipe);
+			free_end(c);
 			return (0);
+		}
 	}
 	return (1);
 }

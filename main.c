@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/20 23:29:25 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:18:37 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 // //int			path_okay();
 int	check_files(t_struct *c)
 {
-	int	fd;
-
-	(void)c;
-	fd = open(c->av[0], O_RDONLY);
-	if (fd == -1)
+	c->fd_in = open(c->av[1], O_RDONLY);
+	if (c->fd_in == -1)
 	{
 		free_end(c);
-		return (fd);
+		return (c->fd_in);
 	}
-	printf("number = %d\n ", fd);
-	fd = open(c->av[c->ac - 1], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-	printf("number = %d\n ", fd);
+	c->fd_out = open(c->av[c->ac - 1], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR); // 0644
+	if (c->fd_out == -1)
+	{
+		free_end(c);
+		return (c->fd_out);
+	}
 	return (1);
 }
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **env)
 	if (!env || argc < 5)
 		return (0);
 	i = 1;
-	c = init_struct();
+	c = init_struct(); // proteger c 
 	set_struct(c, argc, argv, env);
 	if (check_files(c) == -1)
 		return (-1);
@@ -53,17 +53,11 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		}
 	}
-	split_cmd(c);
+	split_cmd(c); // to secure 
 	add_index(c->l_pathes);
-	good_path(c, argv);
+	//good_path(c, argv);
 // j'ai recupere mes commandes et mes options tester si les optioms marchent.
-	display_list(c->l_pathes);
-	if (!c->final_path)
-	{
-		free_d_tab(c->to_try);
-		free(c);
-		return (0);
-	}
+//	display_list(c->l_pathes);
 	return (pipex(c));
 }
 

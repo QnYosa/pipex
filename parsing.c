@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/19 20:46:42 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/21 22:00:09 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	add_cmd(char **to_try, char *cmd)
 	int		i;
 	char	**av;
 
-	av = ft_split(cmd, ' ');
+	av = ft_split(cmd, ' '); // to secure
 	i = -1;
 	while (to_try[++i])
 	{
-		to_try[i] = ft_strjoin(to_try[i], av[0]);
+		to_try[i] = ft_strjoin(to_try[i], av[0]); // a securiser
 	}
 	free_d_tab(av);
 }
@@ -41,16 +41,17 @@ int	get_f_path(t_struct *c, char *tab)
 	int	i;
 
 	i = -1;
-	c->to_try = ft_split(c->path, ':');
-	add_slash(c->to_try);
-	add_cmd(c->to_try, tab);
+	c->to_try = ft_split(c->path, ':'); // securiser
+	add_slash(c->to_try); // ne pas ajouter de slash superflu
+	add_cmd(c->to_try, tab); 
+	// securiser les joins
 	while (c->to_try[++i])
 	{
 		if (access(c->to_try[i], F_OK) == 0)
 		{
-			c->final_path = ft_strdup(c->to_try[i]);
-			list_end(c->l_pathes, c->final_path);
-			c->n_p++;
+			c->final_path = ft_strdup(c->to_try[i]); //a securiser
+			list_end(c->l_pathes, c->final_path); // securiser
+			c->n_p++; // faire commencer a -1
 			free_d_tab(c->to_try);
 			c->to_try = NULL;
 			return (1);

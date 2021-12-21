@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/20 23:07:51 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/21 21:33:41 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_node
 {
 	struct s_node	*next;
 	char			*content;
-	char			*option;
+	// char			*option;
 	int				index;
 	char			**cmd;
 /* 		cmd[0] = command else option */
@@ -48,10 +48,10 @@ typedef struct s_struct
 	char	**cmd; // car admet des options
 	char	*path;
 	char	**env;
-	// int	n_fork;
 	int		**pipe; //toujours un de plus que de process
 	char	**to_try;
-	t_list	*f_pathes; // useless
+	int		fd_in;
+	int		fd_out;
 	char	*final_path;
 	t_list	*l_pathes; // liste des cmd
 }	t_struct;
@@ -82,5 +82,9 @@ void		display_list(t_list *l);
 
 /*		EXEC		*/
 int			pipex(t_struct *c);
+
+/* 		LIST		*/
+char		**return_cmd(t_struct *c, int n);
+char		*return_content(t_struct *c, int n);
 
 #endif

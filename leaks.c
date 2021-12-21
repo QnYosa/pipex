@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:50:03 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/19 20:33:03 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/21 21:44:18 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,15 @@ void	free_t_lists(t_list *c)
 		i = i->next;
 		free(del);
 	}
+	free(c->l_pathes);
 }
 
 void	free_end(t_struct *c)
 {
+	if (c->fd_out != -1)
+		close(c->fd_out);
+	if (c->fd_in != -1)
+		close (c->fd_in);
 	if (c->final_path != NULL)
 		free(c->final_path);
 	if (c->to_try != NULL)

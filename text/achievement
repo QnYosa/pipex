@@ -1,3 +1,23 @@
 execve(c->final_path, &argv[1], env);
 
-Parsing okay ? 
+	pid = fork();
+	if (pid == 0)
+	{
+		printf("HALO %s\n", c->l_pathes->head->content);
+		printf("HALO %s\n", c->av[2]);
+		dup2(c->fd_in, 0);
+		dup2(c->pipe[0][1], 1);
+		close(c->pipe[0][0]);
+		execve(c->l_pathes->head->content, c->l_pathes->head->cmd, c->env);
+	}
+	else
+	{
+		printf("gaga %s\n", c->l_pathes->head->next->content);
+		printf("gaga %s\n", c->av[3]);
+		dup2(c->fd_out, 1);
+		dup2(c->pipe[0][0], 0);
+		close(c->pipe[0][1]);
+		execve(c->l_pathes->head->next->content, c->l_pathes->head->next->cmd, c->env);
+	}
+
+attention au chemin absolu

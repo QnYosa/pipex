@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 19:03:53 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/18 20:27:46 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/21 13:34:33 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	display_list(t_list *l)
 	while (i)
 	{
 		j = -1;
-		printf("salut %s\n", i->content);
+		printf("salut content %s\n", i->content);
 		printf("salut %d\n", i->index);
 		while (i->cmd[++j])
 			printf("salut- %s\n", i->cmd[j]);
