@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/21 22:18:37 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/23 18:47:02 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int	main(int argc, char **argv, char **env)
 	if (!env || argc < 5)
 		return (0);
 	i = 1;
-	c = init_struct(); // proteger c 
+	c = init_struct();
+	if (!c)
+		return (0);
 	set_struct(c, argc, argv, env);
 	if (check_files(c) == -1)
 		return (-1);
@@ -48,8 +50,8 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!get_f_path(c, argv[i]))
 		{
-			printf("JE vous emmerde et je rentre a ma maison\n");
 			free_end(c);
+			perror("JE vous emmerde et je rentre a ma maison\n");
 			return (0);
 		}
 	}

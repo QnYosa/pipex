@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   leaks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:50:03 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/21 21:44:18 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/23 19:18:52 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_t_lists(t_list *c)
 		i = i->next;
 		free(del);
 	}
-	free(c->l_pathes);
+	free(c);
 }
 
 void	free_end(t_struct *c)

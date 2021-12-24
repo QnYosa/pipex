@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/21 22:27:22 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/23 19:16:10 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_struct	*init_struct(void)
 		return (NULL);
 	c->i = -1;
 	c->ac = 0;
-	c->n_p = -1;
 	c->av = NULL;
 	c->env = NULL;
 	c->path = NULL;
@@ -33,17 +32,17 @@ t_struct	*init_struct(void)
 	return (c);
 }
 
-void	set_struct(t_struct *c, int argc, char **argv, char **envi)
+int	set_struct(t_struct *c, int argc, char **argv, char **envi)
 {
-	if (!c || !argc || !argv || !envi)
-		return ;
 	c->ac = argc;
 	c->av = argv;
 	c->env = envi;
-	c->n_p = 0;
 	c->final_path = NULL;
 	c->path = find_path(envi);
-	c->l_pathes = init_list(); // a securiser
+	c->l_pathes = init_list();
+	if (!c->l_pathes)
+		return (0);
+	return (1);
 }
 
 t_list	*init_list(void)
@@ -85,8 +84,8 @@ t_list	*list_end(t_list *list, char *content)
 	return (list);
 }
 
-int	malloc_pipe(t_struct *c)
-{
+int	malloc_pipe(t_struct *c);
+/*{
 	int	i;
 
 	i = -1;
@@ -105,5 +104,5 @@ int	malloc_pipe(t_struct *c)
 	}
 	return (1);
 }
-
+*/
 //	execve(/bin/ls, {"ls", "-l"}, env);

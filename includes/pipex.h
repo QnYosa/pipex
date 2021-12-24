@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/21 21:33:41 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/23 19:19:18 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ typedef struct s_struct
 {
 	int		i;
 	int		ac;
-	int		n_p;
 	char	**av;
 	char	**cmd; // car admet des options
 	char	*path;
 	char	**env;
-	int		**pipe; //toujours un de plus que de process
+	//int		**pipe; //toujours un de plus que de process
+	int		pipe[2];
 	char	**to_try;
 	int		fd_in;
 	int		fd_out;
@@ -59,7 +59,7 @@ typedef struct s_struct
 /*		PARSING		*/
 char		*find_path(char **env);
 void		add_slash(char **to_try);
-void		add_cmd(char **to_try, char *cmd);
+int			add_cmd(char **to_try, char *cmd);
 int			get_f_path(t_struct *c, char *tab);
 void		split_cmd(t_struct *c);
 char		*good_path(t_struct *c, char **str);
@@ -71,11 +71,11 @@ void		free_t_lists(t_list *c);
 
 /*		INIT		*/
 void		add_index(t_list *l);
-void		set_struct(t_struct *c, int argc, char **argv, char **envi);
 t_struct	*init_struct(void);
+int			set_struct(t_struct *c, int argc, char **argv, char **envi);
 t_list		*init_list(void);
 t_list		*list_end(t_list *list, char *content);
-int			malloc_pipe(t_struct *c);
+//int			malloc_pipe(t_struct *c);
 
 /*		DISPLAY		*/
 void		display_list(t_list *l);

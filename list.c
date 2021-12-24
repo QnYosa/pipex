@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:27:50 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/21 16:26:34 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/24 02:04:33 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ char	**return_cmd(t_struct *c, int n)
 	if (!c || n > c->l_pathes->length)
 		return (NULL);
 	tmp = c->l_pathes->head;
-	i = -1;
-	while (++i && tmp)
+	i = 0;
+	while (tmp)
 	{
 		if (i == n)
 			return (tmp->cmd);
 		tmp = tmp->next;
+		i++;
 	}
 	return (NULL);
 }
@@ -66,14 +67,15 @@ char	*return_content(t_struct *c, int n)
 	t_node	*tmp;
 
 	if (!c || n > c->l_pathes->length)
-		return (NULL);
+		return (NULL);	
 	tmp = c->l_pathes->head;
-	i = -1;
-	while (++i && tmp)
+	i = 0;
+	while (tmp)
 	{
 		if (i == n)
 			return (tmp->content);
 		tmp = tmp->next;
+		i++;
 	}
 	return (NULL);
 }
