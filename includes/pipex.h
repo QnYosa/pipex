@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
+/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/24 17:11:04 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/26 18:56:16 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int			add_cmd(char **to_try, char *cmd);
 int			get_f_path(t_struct *c, char *tab);
 void		split_cmd(t_struct *c);
 char		*good_path(t_struct *c, char **str);
+int			choose_parser(t_struct *c, int argc, char **argv);
+int			check_argv(char **argv, t_struct *c);
 
 /*		FREE		*/
 void		free_d_tab(char **tab);
@@ -87,5 +89,9 @@ int			pipex(t_struct *c);
 /* 		LIST		*/
 char		**return_cmd(t_struct *c, int n);
 char		*return_content(t_struct *c, int n);
+
+/*		FILES		*/
+int			check_files(t_struct *c);
+int			read_heredoc(t_struct *c);
 
 #endif

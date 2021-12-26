@@ -1,7 +1,8 @@
 NAME = pipex
 
 SRCS	= main.c utils.c parsing.c leaks.c \
-		init.c pipex.c list.c
+		init.c pipex.c list.c hdc_or_not.c \
+		#get_next_line.c get_next_line_utils.c
 
 OBJS	= ${SRCS:.c=.o}
 
