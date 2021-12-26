@@ -6,7 +6,7 @@
 /*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/23 19:19:18 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/24 17:11:04 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ typedef struct s_struct
 	int		i;
 	int		ac;
 	char	**av;
-	char	**cmd; // car admet des options
 	char	*path;
 	char	**env;
-	//int		**pipe; //toujours un de plus que de process
 	int		pipe[2];
 	char	**to_try;
 	int		fd_in;
 	int		fd_out;
+	int		heredoc;
+	char	*buf_hdc;
 	char	*final_path;
-	t_list	*l_pathes; // liste des cmd
+	t_list	*l_pathes;
+	char	**cmd;
 }	t_struct;
 
 /*		PARSING		*/

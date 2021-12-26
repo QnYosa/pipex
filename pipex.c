@@ -6,7 +6,7 @@
 /*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/24 02:10:34 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/24 14:32:00 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,35 @@
 #include "includes/pipex.h"
 #include "includes/libft.h"
 
-/*int	pipe_tab(t_struct *c)
+int	ifs_pipex(t_struct *c, int i, int tmp)
 {
-	int	i;
-
-	i = -1;
-	while (++i < c->ac - 4)
+	if (i == 0)
 	{
-		if (pipe(c->pipe[i]) == -1)
-		{
-			//fonction qui close les pipes qui n'ont pas fail;
-			return (-1);	
-		}	
+		if (dup2(c->fd_in, STDIN_FILENO) < 0 || \
+		dup2(c->pipe[1], STDOUT_FILENO) < 0)
+			return (-1);
+		close(c->pipe[0]);
+		execve(return_content(c, i), return_cmd(c, i), c->env);	
 	}
-	return (1);
+	else if (i == c->l_pathes->length - 1)
+	{
+		if (dup2(c->fd_out, STDOUT_FILENO) < 0 || \
+		dup2(tmp, STDIN_FILENO) < 0)
+			return (-1);
+		execve(return_content(c, i), return_cmd(c, i), c->env);
+	}
+	else
+	{
+		if (dup2(tmp, STDIN_FILENO) > 0 || dup2(c->pipe[1], STDOUT_FILENO))
+			return (-1);
+		close(c->pipe[0]);
+		execve(return_content(c, i), return_cmd(c, i), c->env);
+	}
+	return (0);
 }
-*/
-int	loop_pipex(t_struct *c)
-{
-	int	i;
-	int	pid;
-	int	tmp;
 
-	i = -1;
+int	loop_pipex(t_struct *c, int i, int pid, int tmp)
+{
 	while (++i < c->l_pathes->length)
 	{
 		if (pipe(c->pipe) < 0)
@@ -45,29 +51,8 @@ int	loop_pipex(t_struct *c)
 		if (pid == -1)
 			return (-1);
 		if (pid == 0)
-		{
-			if (i == 0)
-			{
-				if (dup2(c->fd_in, STDIN_FILENO) < 0 || dup2(c->pipe[1], STDOUT_FILENO) < 0)
-					return (-1);
-				close(c->pipe[0]);
-				execve(return_content(c, i), return_cmd(c, i), c->env);
-				
-			}
-			else if (i == c->l_pathes->length - 1)
-			{
-				if (dup2(c->fd_out, STDOUT_FILENO) < 0 || dup2(tmp, STDIN_FILENO) < 0)
-					return (-1);
-				execve(return_content(c, i), return_cmd(c, i), c->env);
-			}
-			else
-			{
-				if (dup2(tmp, STDIN_FILENO) > 0 || dup2(c->pipe[1], STDOUT_FILENO))
-					return (-1);
-				close(c->pipe[0]);
-				execve(return_content(c, i), return_cmd(c, i), c->env);
-			}
-		}
+			if (ifs_pipex(c, i, tmp) <  -1)
+				return (-1);
 		waitpid(-1, NULL, 0);
 		close(c->pipe[1]);
 		tmp = c->pipe[0];
@@ -79,18 +64,14 @@ int	loop_pipex(t_struct *c)
 int	pipex(t_struct *c)
 {
 	int	i;
+	int	pid;
+	int	tmp;
 
-	i = c->l_pathes->length - 1;
-	// pipe = nb cmd - 1 donc i 
-
-/*	if (!malloc_pipe(c))
-		return (0);
-		*/
-	//if (pipe_tab(c) == -1)
-		//return (1);
-	// dup2(c->fd_in, STDIN_FILENO);
-	loop_pipex(c);
-	// waitpid(-1, NULL, 0);
+	i = -1;
+	pid = 0;
+	tmp = 0;
+	loop_pipex(c, i, pid, tmp);
+	free_end(c);
 	return (0);
 }
 

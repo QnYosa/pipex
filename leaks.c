@@ -6,7 +6,7 @@
 /*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:50:03 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/23 19:18:52 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/24 17:14:16 by dimitriyoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	free_end(t_struct *c)
 		free_t_lists(c->l_pathes);
 		c->l_pathes = NULL;
 	}
+	if (c->buf_hdc)
+		free(c->buf_hdc);
 	if (c)
 		free(c);
 	c = NULL;

@@ -1,0 +1,9 @@
+le heredoc va lire sur l'entree standard jusqu'à ce qu'il
+tombe sur le delimiteur.
+
+il va s'arreter sir la line = strncmp de delimiteur.
+
+usage de la fonction read donc pour "<<"
+dire qu'on va utiliser le read end pour ">>" afin de concatener
+ajout de la variable is_heredoc pour savoir si on a du heredoc 
+read_heredoc
