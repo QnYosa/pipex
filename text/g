@@ -1,3 +1,4 @@
-ld,ld
-g
-cat
+bugs 
+
+si j'ecris holaaa 
+bug si je ctrl + d direct segfault

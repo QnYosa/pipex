@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/26 18:56:16 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/28 17:52:33 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char		*find_path(char **env);
 void		add_slash(char **to_try);
 int			add_cmd(char **to_try, char *cmd);
 int			get_f_path(t_struct *c, char *tab);
-void		split_cmd(t_struct *c);
+int			split_cmd(t_struct *c);
 char		*good_path(t_struct *c, char **str);
 int			choose_parser(t_struct *c, int argc, char **argv);
 int			check_argv(char **argv, t_struct *c);
@@ -93,5 +93,6 @@ char		*return_content(t_struct *c, int n);
 /*		FILES		*/
 int			check_files(t_struct *c);
 int			read_heredoc(t_struct *c);
+char		*cut_delimiter(char *txt, char *del);
 
 #endif

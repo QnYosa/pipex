@@ -6,28 +6,29 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/26 19:55:48 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/28 23:29:48 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/pipex.h"
 #include "includes/libft.h"
 
-// // env permet de recuperer path poour executer la commande
-// //int			path_okay();
 int	check_files(t_struct *c)
 {
+	int	ret;
+
 	if (c->heredoc == 0)
 	{
 		c->fd_in = open(c->av[1], O_RDONLY);
 		if (c->fd_in == -1)
 		{
+			ret = c->fd_in;
 			free_end(c);
-			return (c->fd_in);
+			return (ret);
 		}
 	}
 	c->fd_out = open(c->av[c->ac - 1], \
-	O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR); // 0644
+	O_WRONLY | O_CREAT, 0777);
 	if (c->fd_out == -1)
 	{
 		free_end(c);
@@ -53,36 +54,6 @@ int	check_argv(char **argv, t_struct *c)
 	return (0);
 }
 
-int	read_heredoc(t_struct *c)
-{
-	char		buf[2];
-	char		*txt;
-
-	txt = ft_strdup("");
-	if (!txt)
-		return (0);
-	while (read(0, buf, 1) > 0)
-	{
-		buf[1] = 0;
-		txt = ft_strjoin(txt, buf);
-		if (!strchr(txt, '\n'))
-		{
-			if (!ft_strncmp(txt, c->av[2], ft_strlen(c->av[2])))
-			{
-				printf("%s\n", txt);
-				break ;
-			}
-		}
-		else
-		{
-			free(txt);
-			txt = ft_strdup("");
-		}
-	}
-	c->buf_hdc = txt;
-	return (0);
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	t_struct	*c;
@@ -96,12 +67,16 @@ int	main(int argc, char **argv, char **env)
 	set_struct(c, argc, argv, env);
 	if (check_files(c) == -1)
 		return (-1);
-	if (!choose_parser(c, argc, argv))
-		return (0);
 	if (choose_parser(c, argc, argv) <= 0)
+	{
+		free_end(c);
 		return (0);
-	return (0);
-	split_cmd(c); // to secure 
+	}
+	if (!split_cmd(c))
+	{
+		free_end(c);
+		return (0);
+	}
 	add_index(c->l_pathes);
 	return (pipex(c));
 }

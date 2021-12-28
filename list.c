@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
+/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:27:50 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/24 02:04:33 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/28 22:29:01 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,24 @@ void	add_index(t_list *l)
 	}
 }
 
-void	split_cmd(t_struct *c)
+int	split_cmd(t_struct *c)
 {
 	int		i;
 	t_node	*tmp;
 
-	i = 1;
 	tmp = c->l_pathes->head;
+	i = 1;
 	while (tmp)
 	{
 		tmp->cmd = ft_split(c->av[++i], ' ');
+		if (!tmp->cmd)
+		{
+			free_t_lists(c->l_pathes);
+			return (0);
+		}
 		tmp = tmp->next;
 	}
+	return (1);
 }
 
 char	**return_cmd(t_struct *c, int n)
@@ -54,7 +60,10 @@ char	**return_cmd(t_struct *c, int n)
 	while (tmp)
 	{
 		if (i == n)
+		{
+			printf("%s\n", tmp->cmd[0]);
 			return (tmp->cmd);
+		}
 		tmp = tmp->next;
 		i++;
 	}
@@ -67,7 +76,7 @@ char	*return_content(t_struct *c, int n)
 	t_node	*tmp;
 
 	if (!c || n > c->l_pathes->length)
-		return (NULL);	
+		return (NULL);
 	tmp = c->l_pathes->head;
 	i = 0;
 	while (tmp)

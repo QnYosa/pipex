@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
+/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/23 19:13:50 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/28 21:53:28 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 void	add_slash(char **to_try)
 {
 	int	i;
-	int end;
+	int	end;
 
 	i = -1;
-	
 	while (to_try[++i])
 	{
 		end = ft_strlen(to_try[i]);
 		if (to_try[i][end - 1] != '/')
-			to_try[i] = ft_strjoin(to_try[i], "/");	
+			to_try[i] = ft_strjoin(to_try[i], "/");
 	}
 }
 
@@ -39,7 +38,7 @@ int	add_cmd(char **to_try, char *cmd)
 	i = -1;
 	while (to_try[++i])
 	{
-		to_try[i] = ft_strjoin(to_try[i], av[0]); // a securiser
+		to_try[i] = ft_strjoin(to_try[i], av[0]);
 		if (!to_try[i])
 			return (0);
 	}
@@ -51,7 +50,7 @@ int	cmd_is_path(char *tab, t_struct *c)
 {
 	if (access(tab, F_OK) == 0)
 	{
-		c->final_path = tab;
+		c->final_path = ft_strdup(tab);
 		return (0);
 	}
 	return (1);
@@ -84,7 +83,7 @@ int	get_f_path(t_struct *c, char *tab)
 		{
 			c->final_path = ft_strdup(c->to_try[i]);
 			if (!c->final_path || !list_end(c->l_pathes, c->final_path))
-				return (0);			
+				return (0);
 			free_d_tab(c->to_try);
 			c->to_try = NULL;
 			return (1);

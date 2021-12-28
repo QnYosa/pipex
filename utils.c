@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 19:03:53 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/21 13:34:33 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/28 22:22:01 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,31 @@ char	*good_path(t_struct *c, char **str)
 		i = i->next;
 	}
 	return (NULL);
+}
+
+char	*cut_delimiter(char *txt, char *del)
+{
+	int		i;
+	char	*cpy;
+	int		len;
+	char	*final_txt;
+
+	len = ft_strlen(txt);
+	cpy = txt;
+	i = 0;
+	while (cpy[i] && ft_strncmp(cpy, del, ft_strlen(del)))
+	{
+		cpy++;
+		i++;
+	}
+	while (i < len)
+	{
+		txt[i] = 0;
+		i++;
+	}
+	final_txt = ft_strdup(txt);
+	if (!final_txt)
+		return (NULL);
+	free(txt);
+	return (final_txt);
 }

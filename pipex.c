@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/26 17:17:40 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/28 23:34:48 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int	ifs_pipex(t_struct *c, int i, int tmp)
 {
 	if (i == 0 && c->heredoc == 1)
 	{
-		if (dup2(c->pipe[1], STDOUT_FILENO) < 0)
-			return (-1);
 		close(c->pipe[0]);
+		dup2(c->pipe[1], 1);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
 	else if (i == 0)
@@ -61,8 +60,8 @@ int	loop_pipex(t_struct *c, int i, int pid, int tmp)
 			if (ifs_pipex(c, i, tmp) < -1)
 				return (-1);
 		waitpid(-1, NULL, 0);
-		close(c->pipe[1]);
 		tmp = c->pipe[0];
+		close(c->pipe[1]);
 	}
 	return (1);
 }
@@ -77,6 +76,7 @@ int	pipex(t_struct *c)
 	pid = 0;
 	tmp = 0;
 	loop_pipex(c, i, pid, tmp);
+	close(c->fd_out);
 	free_end(c);
 	return (0);
 }

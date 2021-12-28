@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   leaks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
+/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:50:03 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/24 17:14:16 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/28 23:26:17 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	free_t_lists(t_list *c)
 
 void	free_end(t_struct *c)
 {
-	if (c->fd_out != -1)
-		close(c->fd_out);
-	if (c->fd_in != -1)
+	if (!c)
+		return ;
+	if (c->heredoc != 1 && c->fd_in != -1)
 		close (c->fd_in);
 	if (c->final_path != NULL)
 		free(c->final_path);
@@ -65,7 +65,7 @@ void	free_end(t_struct *c)
 		free_t_lists(c->l_pathes);
 		c->l_pathes = NULL;
 	}
-	if (c->buf_hdc)
+	if (c->heredoc == 1 && c->buf_hdc)
 		free(c->buf_hdc);
 	if (c)
 		free(c);

@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:28:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/26 18:58:41 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/28 23:19:53 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,67 @@ int	no_heredoc(t_struct *c, int argc, char **argv)
 	return (1);
 }
 
-int	heredoc_here(t_struct *c, int argc, char **argv)
+int	read_heredoc(t_struct *c)
 {
-	(void)argc;
-	(void)argv;
-	read_heredoc(c);
-	c->fd_in = open("infile", \
-	O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-	if (c->fd_in == -1)
+	char		buf[2];
+	char		*txt;
+
+	c->buf_hdc = ft_strdup("");
+	txt = ft_strdup("");
+	if (!txt || !c->buf_hdc)
+		return (0);
+	while (read(0, buf, 1) > 0)
 	{
-		free_end(c);
-		return (c->fd_out);
+		buf[1] = 0;
+		txt = ft_strjoin(txt, buf);
+		if (strchr(txt, '\n'))
+		{
+			// printf("return = %d", ft_strncmp(txt, c->av[2], ft_strlen(txt) - 1) == 0);
+			if (ft_strncmp(txt, c->av[2], ft_strlen(txt) - 1) == 0)
+			{
+				free(txt);
+				return (0);
+			}
+			c->buf_hdc = ft_strjoin(c->buf_hdc, txt);
+			free(txt);
+			txt = ft_strdup("");
+			if (!txt)
+				return (0);
+		}
 	}
-	write(c->fd_in, &c->buf_hdc, ft_strlen(c->buf_hdc));
+	return (0);
+}
+
+int	heredoc_parser(t_struct *c)
+{
+	int			i;
+
+	i = 2;
+	while (++i < c->ac - 1)
+	{
+		if (!get_f_path(c, c->av[i]))
+		{
+			free_end(c);
+			perror("je vous emmerde et je rentre a ma maison");
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	heredoc_here(t_struct *c)
+{
+	read_heredoc(c);
+	// c->fd_in = open("infile", \
+	// O_APPEND | O_WRONLY | O_CREAT, 0777);
+	// if (c->fd_in == -1)
+	// {
+	// 	free_end(c);
+	// 	return (c->fd_out);
+	// }
+	//c->buf_hdc = cut_delimiter(c->buf_hdc, c->av[2]);
+	heredoc_parser(c);
+	/* write(c->fd_in, c->buf_hdc, ft_strlen(c->buf_hdc)); */
 	return (1);
 }
 
@@ -51,5 +99,5 @@ int	choose_parser(t_struct *c, int argc, char **argv)
 	if (c->heredoc == 0)
 		return (no_heredoc(c, argc, argv));
 	else
-		return (heredoc_here(c, argc, argv));
+		return (heredoc_here(c));
 }
