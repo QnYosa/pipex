@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:28:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/28 23:19:53 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/29 19:16:03 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,6 @@ int	heredoc_parser(t_struct *c)
 int	heredoc_here(t_struct *c)
 {
 	read_heredoc(c);
-	// c->fd_in = open("infile", \
-	// O_APPEND | O_WRONLY | O_CREAT, 0777);
-	// if (c->fd_in == -1)
-	// {
-	// 	free_end(c);
-	// 	return (c->fd_out);
-	// }
-	//c->buf_hdc = cut_delimiter(c->buf_hdc, c->av[2]);
 	heredoc_parser(c);
 	/* write(c->fd_in, c->buf_hdc, ft_strlen(c->buf_hdc)); */
 	return (1);
@@ -96,8 +88,8 @@ int	heredoc_here(t_struct *c)
 
 int	choose_parser(t_struct *c, int argc, char **argv)
 {
-	if (c->heredoc == 0)
-		return (no_heredoc(c, argc, argv));
-	else
+	if (c->heredoc == 1)
 		return (heredoc_here(c));
+	else
+		return (no_heredoc(c, argc, argv));
 }

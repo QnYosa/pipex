@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/28 23:34:48 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/29 19:36:26 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ int	ifs_pipex(t_struct *c, int i, int tmp)
 {
 	if (i == 0 && c->heredoc == 1)
 	{
-		close(c->pipe[0]);
 		dup2(c->pipe[1], 1);
+		write(1, c->buf_hdc, ft_strlen(c->buf_hdc));
+		close(c->pipe[0]);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
-	else if (i == 0)
+	else if (i == 0 && c->heredoc == 0)
 	{
 		if (dup2(c->fd_in, STDIN_FILENO) < 0 || \
 		dup2(c->pipe[1], STDOUT_FILENO) < 0)
 			return (-1);
+		close(c->fd_in);
 		close(c->pipe[0]);
+		close(c->pipe[1]);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
 	else if (i == c->l_pathes->length - 1)
@@ -35,6 +38,8 @@ int	ifs_pipex(t_struct *c, int i, int tmp)
 		if (dup2(c->fd_out, STDOUT_FILENO) < 0 || \
 		dup2(tmp, STDIN_FILENO) < 0)
 			return (-1);
+		close(c->fd_out);
+		close(tmp);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
 	else
@@ -59,7 +64,7 @@ int	loop_pipex(t_struct *c, int i, int pid, int tmp)
 		if (pid == 0)
 			if (ifs_pipex(c, i, tmp) < -1)
 				return (-1);
-		waitpid(-1, NULL, 0);
+		waitpid(pid, NULL, 0);
 		tmp = c->pipe[0];
 		close(c->pipe[1]);
 	}
@@ -77,6 +82,7 @@ int	pipex(t_struct *c)
 	tmp = 0;
 	loop_pipex(c, i, pid, tmp);
 	close(c->fd_out);
+	close(c->fd_in);
 	free_end(c);
 	return (0);
 }

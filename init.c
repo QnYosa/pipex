@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimitriyoula <dimitriyoula@student.42.f    +#+  +:+       +#+        */
+/*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/23 19:16:10 by dimitriyoul      ###   ########.fr       */
+/*   Updated: 2021/12/29 18:56:42 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_struct	*init_struct(void)
 	c->av = NULL;
 	c->env = NULL;
 	c->path = NULL;
+	c->heredoc = 0;
 	c->to_try = NULL;
 	c->l_pathes = NULL;
 	c->final_path = NULL;
