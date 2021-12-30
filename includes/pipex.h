@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:58:34 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/28 17:52:33 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 23:48:02 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int			split_cmd(t_struct *c);
 char		*good_path(t_struct *c, char **str);
 int			choose_parser(t_struct *c, int argc, char **argv);
 int			check_argv(char **argv, t_struct *c);
+int			cmd_is_path(char *tab, t_struct *c);
+char		*cut_path(char *str, char *no_space);
 
 /*		FREE		*/
 void		free_d_tab(char **tab);

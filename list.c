@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:27:50 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/28 22:29:01 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 20:40:46 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	split_cmd(t_struct *c)
 	int		i;
 	t_node	*tmp;
 
+	if (!c->l_pathes)
+		return (0);
 	tmp = c->l_pathes->head;
 	i = 1;
 	while (tmp)
@@ -60,10 +62,7 @@ char	**return_cmd(t_struct *c, int n)
 	while (tmp)
 	{
 		if (i == n)
-		{
-			printf("%s\n", tmp->cmd[0]);
 			return (tmp->cmd);
-		}
 		tmp = tmp->next;
 		i++;
 	}

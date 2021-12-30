@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/29 19:10:27 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 22:50:46 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	check_argv(argv, c);
 	set_struct(c, argc, argv, env);
+	// printf("salut %d\n", access(argv[4], F_OK));
+	// 	return (0);
 	if (check_files(c) == -1)
 		return (-1);
 	if (choose_parser(c, argc, argv) <= 0)

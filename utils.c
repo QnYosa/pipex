@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 19:03:53 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/28 22:22:01 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 23:47:40 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,29 +93,23 @@ char	*good_path(t_struct *c, char **str)
 	return (NULL);
 }
 
-char	*cut_delimiter(char *txt, char *del)
+char	*cut_path(char *str, char *no_space)
 {
 	int		i;
-	char	*cpy;
-	int		len;
-	char	*final_txt;
+	int		j;
 
-	len = ft_strlen(txt);
-	cpy = txt;
 	i = 0;
-	while (cpy[i] && ft_strncmp(cpy, del, ft_strlen(del)))
-	{
-		cpy++;
+	j = 0;
+	while (str[i] && (str[i] <= 9 || str[i] >= 13) && str[i] != ' ')
 		i++;
-	}
-	while (i < len)
-	{
-		txt[i] = 0;
-		i++;
-	}
-	final_txt = ft_strdup(txt);
-	if (!final_txt)
+	no_space = malloc(sizeof(char) * (i + 1));
+	if (!no_space && no_space)
 		return (NULL);
-	free(txt);
-	return (final_txt);
+	while (j < i)
+	{
+		no_space[j] = str[j];
+		j++;
+	}
+	no_space[j] = 0;
+	return (no_space);
 }

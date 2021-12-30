@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:28:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/29 19:16:03 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 22:29:37 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@ int	no_heredoc(t_struct *c, int argc, char **argv)
 	i = 1;
 	while (++i < argc - 1)
 	{
-		if (!get_f_path(c, argv[i]))
+		if (cmd_is_path(argv[i], c))
 		{
-			free_end(c);
-			perror("JE vous emmerde et je rentre a ma maison\n");
-			return (0);
+			if (!list_end(c->l_pathes, c->av[i]))
+			{
+				return (0);
+			}
+		}
+		else
+		{
+			if (!get_f_path(c, argv[i]))
+			{
+				perror("JE vous emmerde et je rentre a ma maison\n");
+				return (0);
+			}			
 		}
 	}
 	return (1);
@@ -45,19 +54,21 @@ int	read_heredoc(t_struct *c)
 		txt = ft_strjoin(txt, buf);
 		if (strchr(txt, '\n'))
 		{
-			// printf("return = %d", ft_strncmp(txt, c->av[2], ft_strlen(txt) - 1) == 0);
 			if (ft_strncmp(txt, c->av[2], ft_strlen(txt) - 1) == 0)
 			{
 				free(txt);
-				return (0);
+				return (1);
 			}
 			c->buf_hdc = ft_strjoin(c->buf_hdc, txt);
+			if (!c->buf_hdc)
+				return (0);
 			free(txt);
 			txt = ft_strdup("");
 			if (!txt)
 				return (0);
 		}
 	}
+	free(txt);
 	return (0);
 }
 
@@ -68,11 +79,22 @@ int	heredoc_parser(t_struct *c)
 	i = 2;
 	while (++i < c->ac - 1)
 	{
-		if (!get_f_path(c, c->av[i]))
+		printf("%s\n", c->av[i]);
+		if (cmd_is_path(c->av[i], c))
 		{
-			free_end(c);
-			perror("je vous emmerde et je rentre a ma maison");
-			return (0);
+			printf("salut je suis une commande\n");
+			if (!list_end(c->l_pathes, c->av[i]))
+			{
+				return (0);
+			}
+		}
+		else
+		{
+			if (!get_f_path(c, c->av[i]))
+			{
+				perror("je vous emmerde et je rentre a ma maison");
+				return (0);
+			}
 		}
 	}
 	return (1);
@@ -81,8 +103,8 @@ int	heredoc_parser(t_struct *c)
 int	heredoc_here(t_struct *c)
 {
 	read_heredoc(c);
-	heredoc_parser(c);
-	/* write(c->fd_in, c->buf_hdc, ft_strlen(c->buf_hdc)); */
+	if (!heredoc_parser(c))
+		return (0);
 	return (1);
 }
 

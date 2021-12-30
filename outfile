@@ -1,35 +1,4 @@
-total 240
-drwxr-xr-x  6 dyoula 2021_paris  4096 Dec 29 19:34 .
-drwxr-xr-x 11 dyoula 2021_paris  4096 Dec 26 16:56 ..
--rw-r--r--  1 dyoula 2021_paris  2013 Dec 26 19:36 get_next_line.c
--rw-r--r--  1 dyoula 2021_paris  2344 Dec 26 19:36 get_next_line_utils.c
-drwxr-xr-x  8 dyoula 2021_paris  4096 Dec 28 23:43 .git
--rw-r--r--  1 dyoula 2021_paris     0 Jun 20  1982 .gitignore
--rw-r--r--  1 dyoula 2021_paris  2290 Dec 29 19:16 hdc_or_not.c
--rw-r--r--  1 dyoula 2021_paris  7000 Dec 29 19:23 hdc_or_not.o
--rw-r--r--  1 dyoula 2021_paris  1496 Dec 26 16:56 huhu
--rw-------  1 dyoula 2021_paris  2014 Dec 28 23:37 huhuv
-drwxr-xr-x  2 dyoula 2021_paris  4096 Dec 26 19:36 includes
--rwxr-xr-x  1 dyoula 2021_paris     0 Dec 29 19:07 infile
--rw-r--r--  1 dyoula 2021_paris  2434 Dec 29 18:56 init.c
--rw-r--r--  1 dyoula 2021_paris  5608 Dec 29 19:23 init.o
--rw-r--r--  1 dyoula 2021_paris  1685 Dec 28 23:26 leaks.c
--rw-r--r--  1 dyoula 2021_paris  5184 Dec 29 19:23 leaks.o
-drwxr-xr-x  2 dyoula 2021_paris  4096 Dec 29 19:33 libft
--rw-r--r--  1 dyoula 2021_paris 57578 Dec 29 19:33 libft.a
--rw-r--r--  1 dyoula 2021_paris  1890 Dec 28 22:29 list.c
--rw-r--r--  1 dyoula 2021_paris  5816 Dec 29 19:23 list.o
--rw-r--r--  1 dyoula 2021_paris     0 Jun 20  1982 ls
--rw-r--r--  1 dyoula 2021_paris  1926 Dec 29 19:10 main.c
--rw-r--r--  1 dyoula 2021_paris  6048 Dec 29 19:23 main.o
--rw-r--r--  1 dyoula 2021_paris   660 Dec 26 19:48 Makefile
--rwxr-xr-x  1 dyoula 2021_paris     0 Dec 29 19:34 outfile
--rw-r--r--  1 dyoula 2021_paris  2180 Dec 28 21:53 parsing.c
--rw-r--r--  1 dyoula 2021_paris  6792 Dec 29 19:23 parsing.o
--rwxr-xr-x  1 dyoula 2021_paris 39288 Dec 29 19:33 pipex
--rw-r--r--  1 dyoula 2021_paris  2649 Dec 29 19:33 pipex.c
--rw-r--r--  1 dyoula 2021_paris  6976 Dec 29 19:33 pipex.o
-drwxr-xr-x  2 dyoula 2021_paris  4096 Dec 26 16:56 text
--rw-r--r--  1 dyoula 2021_paris  2445 Dec 28 22:22 utils.c
--rw-r--r--  1 dyoula 2021_paris  7664 Dec 29 19:23 utils.o
--rw-r--r--  1 dyoula 2021_paris     0 Jun 20  1982 wc
+1
+0
+  5      10      52
+  44

@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:50:03 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/28 23:26:17 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 21:57:31 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@ void	free_d_tab(char **tab)
 		if (tab[i])
 			free(tab[i]);
 	}
-	if (tab)
-	{
-		free(tab);
-		tab = NULL;
-	}
+	free(tab);
+	tab = NULL;
 }
 
 void	free_t_lists(t_list *c)
@@ -44,6 +41,7 @@ void	free_t_lists(t_list *c)
 	{
 		del = i;
 		free_d_tab(del->cmd);
+		free(del->content);
 		i = i->next;
 		free(del);
 	}
@@ -56,17 +54,15 @@ void	free_end(t_struct *c)
 		return ;
 	if (c->heredoc != 1 && c->fd_in != -1)
 		close (c->fd_in);
-	if (c->final_path != NULL)
+	if (c->heredoc == 1 && c->buf_hdc)
+		free(c->buf_hdc);
+	if (c->final_path)
 		free(c->final_path);
-	if (c->to_try != NULL)
-		free_d_tab(c->to_try);
 	if (c->l_pathes != NULL)
 	{
 		free_t_lists(c->l_pathes);
 		c->l_pathes = NULL;
 	}
-	if (c->heredoc == 1 && c->buf_hdc)
-		free(c->buf_hdc);
 	if (c)
 		free(c);
 	c = NULL;

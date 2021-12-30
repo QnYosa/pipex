@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/28 21:53:28 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 23:46:42 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,21 @@ int	add_cmd(char **to_try, char *cmd)
 
 int	cmd_is_path(char *tab, t_struct *c)
 {
-	if (access(tab, F_OK) == 0)
+	char	*no_space;
+
+	no_space = NULL;
+	no_space = cut_path(tab, no_space);
+	printf("hello %s\n", no_space);
+	if (!no_space)
+		return (0);
+	if (access(no_space, F_OK) == 0)
 	{
 		c->final_path = ft_strdup(tab);
-		return (0);
+		free(no_space);
+		return (1);
 	}
-	return (1);
+	free(no_space);
+	return (0);
 }
 
 int	check_errors(char *tab, t_struct *c)
@@ -81,13 +90,19 @@ int	get_f_path(t_struct *c, char *tab)
 	{
 		if (access(c->to_try[i], F_OK) == 0)
 		{
+			if (c->final_path)
+				free(c->final_path);
 			c->final_path = ft_strdup(c->to_try[i]);
 			if (!c->final_path || !list_end(c->l_pathes, c->final_path))
+			{
+				free_d_tab(c->to_try);
 				return (0);
+			}
 			free_d_tab(c->to_try);
 			c->to_try = NULL;
 			return (1);
 		}
 	}
+	free_d_tab(c->to_try);
 	return (0);
 }

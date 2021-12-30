@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/29 19:36:26 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 18:51:39 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,8 @@ int	pipex(t_struct *c)
 	tmp = 0;
 	loop_pipex(c, i, pid, tmp);
 	close(c->fd_out);
-	close(c->fd_in);
+	if (c->heredoc == 0)
+		close(c->fd_in);
 	free_end(c);
 	return (0);
 }
-
-/*
-|	fermer tous les fds sauf ceux que j'utilise 
-
-	Si [ Premiere cmd ]
-	|
-	|	dup2(fd_in, stdin)
-	|
-	Sinon Si [ Derniere cmd ]
-	|
-	|	dup2(fd_out, stdout)
-	|
-	Sinon
-	|
-	|	dup2(pipe[i - 1][0], stdin)
-	|	dup2(pipe[i][1], stdout)
-	|
-	FinSi
-
-*/

@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/29 18:56:42 by dyoula           ###   ########.fr       */
+/*   Updated: 2021/12/30 18:51:45 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_list	*list_end(t_list *list, char *content)
 	node = malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
-	node->content = content;
+	node->content = ft_strdup(content);
 	node->next = NULL;
 	if (list->head == NULL)
 	{
@@ -84,26 +84,3 @@ t_list	*list_end(t_list *list, char *content)
 	list->length++;
 	return (list);
 }
-
-int	malloc_pipe(t_struct *c);
-/*{
-	int	i;
-
-	i = -1;
-	c->pipe = malloc(sizeof(int) * (c->l_pathes->length - 1));
-	if (!c->pipe)
-		return (0);
-	while (++i < (c->l_pathes->length - 1))
-	{
-		c->pipe[i] = malloc(sizeof(int) * 2);
-		if (!c->pipe[i])
-		{
-			free_d_tab(c->pipe);
-			free_end(c);
-			return (0);
-		}
-	}
-	return (1);
-}
-*/
-//	execve(/bin/ls, {"ls", "-l"}, env);
