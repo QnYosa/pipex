@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/30 23:46:42 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/01 16:53:10 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	cmd_is_path(char *tab, t_struct *c)
 
 	no_space = NULL;
 	no_space = cut_path(tab, no_space);
-	printf("hello %s\n", no_space);
 	if (!no_space)
 		return (0);
-	if (access(no_space, F_OK) == 0)
+	if (access(no_space, F_OK) == 0 && \
+		(no_space[0] == '/' || no_space[0] == '.'))
 	{
 		c->final_path = ft_strdup(tab);
 		free(no_space);
@@ -67,7 +67,7 @@ int	cmd_is_path(char *tab, t_struct *c)
 
 int	check_errors(char *tab, t_struct *c)
 {
-	if (!cmd_is_path(tab, c))
+	if (cmd_is_path(tab, c))
 		return (0);
 	c->to_try = ft_split(c->path, ':');
 	if (!c->to_try)

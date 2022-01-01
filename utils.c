@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 19:03:53 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/30 23:47:40 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/01 17:09:32 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	display_list(t_list *l)
 {
 	t_node	*i;
 	int		j;
+	int		k;
 
 	if (!l)
 		return ;
@@ -67,8 +68,17 @@ void	display_list(t_list *l)
 		j = -1;
 		printf("salut content %s\n", i->content);
 		printf("salut %d\n", i->index);
+		k = 0;
 		while (i->cmd[++j])
+		{
 			printf("salut- %s\n", i->cmd[j]);
+			while (i->cmd[k])
+			{
+				printf("cmd ->%s\n", i->cmd[k]);
+				k++;
+			}
+		}
+		printf("\n");
 		i = i->next;
 	}
 }
@@ -84,8 +94,6 @@ char	*good_path(t_struct *c, char **str)
 	{
 		if (ft_strncmp(i->cmd[0], *str, ft_strlen(*str)))
 		{
-			//printf("hola %s\n", *str);
-			//execve(i->content, &i->cmd[0], c->env);
 			return (i->content);
 		}
 		i = i->next;

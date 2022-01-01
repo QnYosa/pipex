@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/30 18:51:39 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/01 17:05:24 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	pipex(t_struct *c)
 	i = -1;
 	pid = 0;
 	tmp = 0;
+	//printf("yoooo\n");
+	display_list(c->l_pathes);
 	loop_pipex(c, i, pid, tmp);
 	close(c->fd_out);
 	if (c->heredoc == 0)
