@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:27:50 by dyoula            #+#    #+#             */
-/*   Updated: 2021/12/30 20:40:46 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/02 17:54:32 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ char	**return_cmd(t_struct *c, int n)
 	while (tmp)
 	{
 		if (i == n)
+		{
+			//printf("moujj%s\n", tmp->cmd[0]);
 			return (tmp->cmd);
+		}
 		tmp = tmp->next;
 		i++;
 	}

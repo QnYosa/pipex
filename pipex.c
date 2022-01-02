@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/01 17:05:24 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/02 17:53:56 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int	ifs_pipex(t_struct *c, int i, int tmp)
 {
 	if (i == 0 && c->heredoc == 1)
 	{
-		dup2(c->pipe[1], 1);
-		write(1, c->buf_hdc, ft_strlen(c->buf_hdc));
+		if (dup2(c->pipe[1], 1) < 0)
+			return (-1);
 		close(c->pipe[0]);
+		close(c->pipe[1]);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
 	else if (i == 0 && c->heredoc == 0)
@@ -33,20 +34,25 @@ int	ifs_pipex(t_struct *c, int i, int tmp)
 		close(c->pipe[1]);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
-	else if (i == c->l_pathes->length - 1)
+	else if (i == c->l_pathes->length - 1 /*&& c->heredoc == 0*/)
 	{
 		if (dup2(c->fd_out, STDOUT_FILENO) < 0 || \
 		dup2(tmp, STDIN_FILENO) < 0)
 			return (-1);
 		close(c->fd_out);
 		close(tmp);
+		close(c->pipe[0]);
+		close(c->pipe[1]);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
 	else
 	{
-		if (dup2(tmp, STDIN_FILENO) > 0 || dup2(c->pipe[1], STDOUT_FILENO))
+		if (dup2(tmp, STDIN_FILENO) < 0 || dup2(c->pipe[1], STDOUT_FILENO) < 0)
 			return (-1);
 		close(c->pipe[0]);
+		close(c->pipe[1]);
+		close(tmp);
+		close(c->fd_out);
 		execve(return_content(c, i), return_cmd(c, i), c->env);
 	}
 	return (0);
@@ -80,7 +86,6 @@ int	pipex(t_struct *c)
 	i = -1;
 	pid = 0;
 	tmp = 0;
-	//printf("yoooo\n");
 	display_list(c->l_pathes);
 	loop_pipex(c, i, pid, tmp);
 	close(c->fd_out);

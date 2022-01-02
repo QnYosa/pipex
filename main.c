@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/01 16:35:30 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/02 20:57:14 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ int	main(int argc, char **argv, char **env)
 	set_struct(c, argc, argv, env);
 	if (check_files(c) == -1)
 		return (-1);
+	if (c->heredoc == 1 && argc < 6)
+	{
+		free_end(c);
+		return (0);
+	}
 	if (choose_parser(c, argc, argv) <= 0)
 	{
 		free_end(c);

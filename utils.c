@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 19:03:53 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/01 17:09:32 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/02 17:47:57 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	display_list(t_list *l)
 				k++;
 			}
 		}
+		printf("length = %d\n", l->length);
 		printf("\n");
 		i = i->next;
 	}
