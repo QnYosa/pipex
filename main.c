@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/02 20:57:14 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/04 18:01:06 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ int	check_files(t_struct *c)
 			return (ret);
 		}
 	}
-	c->fd_out = open(c->av[c->ac - 1], \
-	O_WRONLY | O_CREAT, 0777);
+	if (c->heredoc == 1)
+		c->fd_out = open(c->av[c->ac - 1], \
+		O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		c->fd_out = open(c->av[c->ac - 1], \
+	O_WRONLY | O_CREAT, 0644);
 	if (c->fd_out == -1)
 	{
 		free_end(c);
@@ -54,6 +58,12 @@ int	check_argv(char **argv, t_struct *c)
 	return (0);
 }
 
+void	hasta_la_vista_baby(t_struct *c)
+{
+	free_end(c);
+	exit(0);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_struct	*c;
@@ -68,20 +78,11 @@ int	main(int argc, char **argv, char **env)
 	if (check_files(c) == -1)
 		return (-1);
 	if (c->heredoc == 1 && argc < 6)
-	{
-		free_end(c);
-		return (0);
-	}
+		hasta_la_vista_baby(c);
 	if (choose_parser(c, argc, argv) <= 0)
-	{
-		free_end(c);
-		return (0);
-	}
+		hasta_la_vista_baby(c);
 	if (!split_cmd(c))
-	{
-		free_end(c);
-		return (0);
-	}
+		hasta_la_vista_baby(c);
 	add_index(c->l_pathes);
 	return (pipex(c));
 }

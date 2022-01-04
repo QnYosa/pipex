@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/02 16:01:00 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/04 17:41:22 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int	get_f_path(t_struct *c, char *tab)
 		}
 	}
 	free_d_tab(c->to_try);
-	return (0);
+	free_end(c);
+	exit(127);
 }

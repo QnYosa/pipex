@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:27:50 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/02 17:54:32 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/04 16:46:02 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	split_cmd(t_struct *c)
 		return (0);
 	tmp = c->l_pathes->head;
 	i = 1;
+	if (c->heredoc == 1)
+		i = 2;
 	while (tmp)
 	{
 		tmp->cmd = ft_split(c->av[++i], ' ');

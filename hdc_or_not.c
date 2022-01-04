@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:28:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/01 17:07:19 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/04 16:40:43 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,8 @@ int	heredoc_parser(t_struct *c)
 	{
 		if (cmd_is_path(c->av[i], c))
 		{
-			printf("salut je suis une commande\n");
 			if (!list_end(c->l_pathes, c->av[i]))
-			{
 				return (0);
-			}
 		}
 		else
 		{
