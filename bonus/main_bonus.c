@@ -6,12 +6,12 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 22:59:13 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:12:01 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include "includes/libft.h"
+#include "../includes/libft.h"
 
 int	check_files(t_struct *c)
 {

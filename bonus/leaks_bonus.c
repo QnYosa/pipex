@@ -6,12 +6,12 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:50:03 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 22:59:57 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:12:10 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include "includes/libft.h"
+#include "../includes/libft.h"
 
 void	free_d_tab(char **tab)
 {

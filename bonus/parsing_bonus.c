@@ -6,12 +6,12 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 22:59:17 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:11:58 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include "includes/libft.h"
+#include "../includes/libft.h"
 
 void	add_slash(char **to_try)
 {

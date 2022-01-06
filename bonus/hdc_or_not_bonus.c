@@ -6,12 +6,12 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:28:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 23:00:22 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:12:19 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include "includes/libft.h"
+#include "../includes/libft.h"
 
 int	no_heredoc(t_struct *c, int argc, char **argv)
 {

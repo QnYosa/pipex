@@ -6,12 +6,12 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 23:00:09 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:12:13 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include "includes/libft.h"
+#include "../includes/libft.h"
 
 t_struct	*init_struct(void)
 {

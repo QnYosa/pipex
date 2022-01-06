@@ -6,12 +6,12 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:27:50 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 22:59:06 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:12:05 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include "includes/libft.h"
+#include "../includes/libft.h"
 
 void	add_index(t_list *l)
 {
