@@ -1,5 +1,21 @@
-je suis la pour
-bonjour les amiches
-424242242424
-
-bite
+// void	close_mid(t_struct *c, int tmp)
+// {
+// 	ft_putnbr_fd(tmp, 2);
+// 	ft_putstr_fd(" <= salut tmp\n", 2);
+// 	close(tmp);
+// 	ft_putnbr_fd(c->pipe[0], 2);
+// 	ft_putstr_fd(" <= salut pipe[0]\n", 2);
+// 	close(c->pipe[0]);
+// 	ft_putnbr_fd(c->pipe[1], 2);
+// 	ft_putstr_fd(" <= salut pipe[1]\n", 2);
+// 	close(c->pipe[1]);
+// 	ft_putnbr_fd(c->fd_out, 2);
+// 	ft_putstr_fd(" <= salut c->fd_out\n", 2);
+// 	close(c->fd_out);
+// 	if (c->heredoc == 0)
+// 	{
+// 		ft_putnbr_fd(c->fd_in, 2);
+// 		ft_putstr_fd(" <= salut c->fd_in\n", 2);
+// 		close(c->fd_in);
+// 	}
+// }

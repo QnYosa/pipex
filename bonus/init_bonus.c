@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:48:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 22:28:00 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:00:09 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/pipex.h"
+#include "pipex_bonus.h"
 #include "includes/libft.h"
 
 t_struct	*init_struct(void)
@@ -26,6 +26,7 @@ t_struct	*init_struct(void)
 	c->av = NULL;
 	c->env = NULL;
 	c->path = NULL;
+	c->heredoc = 0;
 	c->to_try = NULL;
 	c->l_pathes = NULL;
 	c->final_path = NULL;

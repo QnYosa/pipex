@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:47:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/05 22:05:41 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 22:59:13 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/pipex.h"
+#include "pipex_bonus.h"
 #include "includes/libft.h"
 
 int	check_files(t_struct *c)
 {
 	int	ret;
 
-	if (c->heredoc == 0)
+	c->fd_in = open(c->av[1], O_RDONLY);
+	if (c->fd_in == -1)
 	{
-		c->fd_in = open(c->av[1], O_RDONLY);
-		if (c->fd_in == -1)
-		{
-			ret = c->fd_in;
-			free_end(c);
-			return (ret);
-		}
+		ret = c->fd_in;
+		free_end(c);
+		return (ret);
 	}
-	if (c->heredoc == 1)
-		c->fd_out = open(c->av[c->ac - 1], \
-		O_WRONLY | O_CREAT | O_APPEND, 0664);
-	else
-		c->fd_out = open(c->av[c->ac - 1], \
-	O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	c->fd_out = open(c->av[c->ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (c->fd_out == -1)
 	{
 		free_end(c);
@@ -77,8 +69,6 @@ int	main(int argc, char **argv, char **env)
 	set_struct(c, argc, argv, env);
 	if (check_files(c) == -1)
 		return (-1);
-	if (c->heredoc == 1 && argc < 6)
-		hasta_la_vista_baby(c);
 	if (choose_parser(c, argc, argv) <= 0)
 		hasta_la_vista_baby(c);
 	if (!split_cmd(c))

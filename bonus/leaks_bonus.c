@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   leaks.c                                            :+:      :+:    :+:   */
+/*   leaks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 17:50:03 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 22:27:34 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 22:59:57 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/pipex.h"
+#include "pipex_bonus.h"
 #include "includes/libft.h"
 
 void	free_d_tab(char **tab)
@@ -52,8 +52,10 @@ void	free_end(t_struct *c)
 {
 	if (!c)
 		return ;
-	if (c->fd_in != -1)
+	if (c->heredoc != 1 && c->fd_in != -1)
 		close (c->fd_in);
+	if (c->heredoc == 1 && c->buf_hdc)
+		free(c->buf_hdc);
 	if (c->l_pathes != NULL)
 	{
 		free_t_lists(c->l_pathes);

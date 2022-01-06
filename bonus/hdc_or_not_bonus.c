@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hdc_or_not.c                                       :+:      :+:    :+:   */
+/*   hdc_or_not_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:28:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/04 22:40:51 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/06 23:00:22 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/pipex.h"
+#include "pipex_bonus.h"
 #include "includes/libft.h"
 
 int	no_heredoc(t_struct *c, int argc, char **argv)
@@ -23,9 +23,7 @@ int	no_heredoc(t_struct *c, int argc, char **argv)
 		if (cmd_is_path(argv[i], c))
 		{
 			if (!list_end(c->l_pathes, c->av[i]))
-			{
 				return (0);
-			}
 		}
 		else
 		{
@@ -81,14 +79,18 @@ int	heredoc_parser(t_struct *c)
 	{
 		if (cmd_is_path(c->av[i], c))
 		{
+			printf("hola = %s\n", c->av[i]);
 			if (!list_end(c->l_pathes, c->av[i]))
+			{
+				free_end(c);
 				return (0);
+			}
 		}
 		else
 		{
 			if (!get_f_path(c, c->av[i]))
 			{
-				perror("je vous emmerde et je rentre a ma maison");
+				perror("not a command");
 				return (0);
 			}
 		}
