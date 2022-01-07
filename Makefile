@@ -10,7 +10,7 @@ SRCS	= main.c utils.c parsing.c leaks.c \
 BONUS	= bonus/pipex_bonus.c bonus/main_bonus.c \
 		bonus/parsing_bonus.c bonus/list_bonus.c \
 		bonus/leaks_bonus.c bonus/init_bonus.c \
-		bonus/utils_bonus.c bonus/hdc_or_not.c \
+		bonus/utils_bonus.c bonus/hdc_or_not_bonus.c \
 
 OBJS	= ${SRCS:.c=.o}
 

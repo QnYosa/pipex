@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:28:28 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 22:29:55 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/07 20:26:20 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	path(t_struct *c, int argc, char **argv)
 		{
 			if (!list_end(c->l_pathes, c->av[i]))
 				return (0);
+			free(c->final_path);
 		}
 		else
 		{

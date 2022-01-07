@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:55:38 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 23:11:58 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/07 22:01:06 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	cmd_is_path(char *tab, t_struct *c)
 
 int	check_errors(char *tab, t_struct *c)
 {
-	if (cmd_is_path(tab, c))
-		return (0);
 	c->to_try = ft_split(c->path, ':');
 	if (!c->to_try)
 		return (0);
@@ -90,12 +88,10 @@ int	get_f_path(t_struct *c, char *tab)
 	{
 		if (access(c->to_try[i], F_OK) == 0)
 		{
-			if (c->final_path)
-				free(c->final_path);
-			c->final_path = NULL;
 			c->final_path = ft_strdup(c->to_try[i]);
 			if (!c->final_path || !list_end(c->l_pathes, c->final_path))
 			{
+				free(c->final_path);
 				free_d_tab(c->to_try);
 				return (0);
 			}

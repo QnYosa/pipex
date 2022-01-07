@@ -6,7 +6,7 @@
 /*   By: dyoula <dyoula@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:29:23 by dyoula            #+#    #+#             */
-/*   Updated: 2022/01/06 23:11:54 by dyoula           ###   ########.fr       */
+/*   Updated: 2022/01/08 00:00:50 by dyoula           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,10 @@ void	exec_close_i(t_struct *c, int i, int tmp)
 	free_end(c);
 	exit (127);
 }
-
 int	ifs_pipex(t_struct *c, int i, int tmp)
 {
-	if (i == 0 && c->heredoc == 1)
-	{
-		write(c->pipe[1], c->buf_hdc, ft_strlen(c->buf_hdc));
-		if (dup2(c->pipe[1], 1) < 0 || dup2(c->pipe[0], 0) < 0)
-			return (-1);
-		close(c->pipe[0]);
-		close(c->pipe[1]);
-		close(tmp);
-		execve(return_content(c, i), return_cmd(c, i), c->env);
-		free_end(c);
-		exit(127);
-	}
-	else if (i == 0 && c->heredoc == 0)
+
+	if (i == 0)
 	{
 		if (dup2(c->fd_in, STDIN_FILENO) < 0 || \
 		dup2(c->pipe[1], STDOUT_FILENO) < 0)
@@ -125,17 +113,32 @@ int	loop_pipex(t_struct *c, int i, int pid, int tmp)
 	return (1);
 }
 
+int fd_write(int fd[2], t_struct *c)
+{
+	if (pipe(fd) < 0)
+		return (-1);
+	write(fd[1], c->buf_hdc, ft_strlen(c->buf_hdc));
+	if (dup2(fd[0], 0) < 0)
+		return (-1);
+	close(fd[1]);
+	close(fd[0]);
+	return (1);
+}
+
 int	pipex(t_struct *c)
 {
 	int	i;
 	int	pid;
 	int	tmp;
+	int fd[2];
 
 	i = -1;
 	pid = 0;
 	tmp = 0;
 	//display_list(c->l_pathes);
 	//hdc_to_fd_in(c);
+	if (c->heredoc)
+		write(c->fd_in, c->buf_hdc, ft_strlen(c->buf_hdc));
 	loop_pipex(c, i, pid, tmp);
 	close_all(c, tmp);
 	free_end(c);
